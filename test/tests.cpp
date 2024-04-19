@@ -2,36 +2,30 @@
 #include <gtest/gtest.h>
 #include "../include/textgen.h"
 
-class MarkovChainTest : public ::testing::Test {
- protected:
-    void SetUp() override {
-        generator.Train("the quick brown fox jumps over the lazy dog", 2);
-    }
-
+TEST(test1, PrefixFormation) {
     Generator generator;
-};
-
-TEST(MarkovChainTest, PrefixFormation) {
-    Generator generator;
+    generator.train("the quick brown fox jumps over the lazy dog", 2);
     Prefix prefix = {"the", "quick"};
     EXPECT_EQ(generator.getChain()->first, prefix);
 }
 
-TEST(MarkovChainTest, CheckSuffix) {
+TEST(test2, CheckSuffix) {
     Generator generator;
+    generator.train("the quick brown fox jumps over the lazy dog", 2);
     Prefix prefix = {"the", "quick"};
     EXPECT_EQ(generator.getChain().at(prefix)[0], "brown");
 }
 
-TEST(MarkovChainTest, SingleSuffixSelection) {
+TEST(test3, SingleSuffixSelection) {
     Generator generator;
+    generator.train("the quick brown fox jumps over the lazy dog", 2);
     std::string gen = generator.Generate(100);
     EXPECT_EQ(gen, "brown fox jumps over the lazy dog");
 }
 
-TEST(MarkovChainTest, MultiplySuffixSelection) {
-    Generator generator2;
-    generator2.Train("the quick brown fox quick jumps over the lazy dog", 2);
-    std::string gen = generator2.Generate(100);
+TEST(test4, MultiplySuffixSelection) {
+    Generator generator;
+    generator.Train("the quick brown fox quick jumps over the lazy dog", 2);
+    std::string gen = generator.Generate(100);
     EXPECT_EQ(gen, "brown fox jumps over the lazy dog");
 }
