@@ -7,7 +7,7 @@ TEST(test1, PrefixFormation) {
     generator.Train("the quick brown fox jumps over the lazy dog", 2);
     Prefix prefix = {"the", "quick"};
     std::map<Prefix, std::vector<std::string>> ch = generator.getChain();
-    EXPECT_EQ(ch->first, prefix);
+    EXPECT_EQ(ch.begin()->first, prefix);
 }
 
 TEST(test2, CheckSuffix) {
