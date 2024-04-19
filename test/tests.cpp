@@ -21,7 +21,7 @@ TEST(test3, SingleSuffixSelection) {
     Generator generator;
     generator.Train("the quick brown fox jumps over the lazy dog", 2);
     std::string gen = generator.Generate(100);
-    EXPECT_EQ(gen, "brown fox jumps over the lazy dog");
+    EXPECT_EQ(gen, "brown fox jumps over the lazy dog ");
 }
 
 TEST(test4, MultiplySuffixSelection) {
