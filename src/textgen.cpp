@@ -17,14 +17,17 @@ void Generator::Train(const std::string& text, int prefixSize) {
     }
 }
 
-std::string Generator::Generate(int length) {
-    unsigned int seed = (unsigned int)time(NULL);
+std::string Generator::Generate(int length, unsigned int seed) {
     int index = rand_r(&seed) % chain.size();
-    auto it = chain.begin();
-    std::advance(it, index);
-    Prefix prefix = it->first;
+    auto chain_it = chain.begin();
+    std::advance(chain_it, index);
+    Prefix prefix = chain_it->first;
 
     std::string result;
+
+    for (auto it = prefix.begin(); it != prefix.end(); ++it)
+        result += *it + " ";
+
     for (int i = 0; i < length; i++) {
         std::vector<std::string> suffix = chain[prefix];
         if (suffix.empty()) break;
@@ -35,6 +38,10 @@ std::string Generator::Generate(int length) {
         prefix.push_back(next);
     }
     return result;
+}
+
+void Generator::setChain(std::map<Prefix, std::vector<std::string>> _chain) {
+    chain = _chain;
 }
 
 std::map<Prefix, std::vector<std::string>> Generator::getChain() {
