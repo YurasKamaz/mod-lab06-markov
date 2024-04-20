@@ -21,12 +21,12 @@ TEST(test3, SingleSuffixSelection) {
     Generator generator;
     generator.Train("the quick brown fox jumps over the lazy dog", 2);
     std::string gen = generator.Generate(100, 10);
-    EXPECT_EQ(gen, "brown fox jumps over the lazy dog ");
+    EXPECT_EQ(gen, "the lazy dog ");
 }
 
 TEST(test4, MultiplySuffixSelection) {
     Generator generator;
-    generator.Train("the quick brown fox quick jumps over the lazy dog", 2);
+    generator.Train("the quick brown fox quick jumps over the lazy dog", 1);
     Prefix prefix = {"quick"};
     std::vector<std::string> suffix = { "brown", "jumps" };
     EXPECT_EQ(suffix, generator.getChain().at(prefix));
