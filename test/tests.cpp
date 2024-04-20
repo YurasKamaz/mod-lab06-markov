@@ -29,17 +29,17 @@ TEST(test4, MultiplySuffixSelection) {
     generator.Train("the quick brown fox quick jumps over the lazy dog", 2);
     Prefix prefix = {"quick"};
     std::vector<std::string> suffix = { "brown", "jumps" };
-    EXPECT_EQ(suffix, genreator.getChain().at(prefix));
+    EXPECT_EQ(suffix, generator.getChain().at(prefix));
 }
 
 
 TEST(test5, TextFormation) {
     Generator generator;
-    std::map<prefix, std::vector<std::string> > map = {
+    std::map<Prefix, std::vector<std::string> > chain = {
         { { "the" }, { "quick", "brown" } },
         { { "fox" }, { "quick" } }
     };
-    generator.setChain(map);
+    generator.setChain(chain);
     std::string res = generator.Generate(10, 20);
     EXPECT_EQ("fox quick ", res);
 }

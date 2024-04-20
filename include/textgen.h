@@ -18,7 +18,7 @@ class Generator {
     std::map<Prefix, std::vector<std::string>> chain;
  public:
     void Train(const std::string& text, int prefixSize);
-    std::string Generate(int length, unsigned int seed = (unsigned int)time(NULL));
+    std::string Generate(int length, unsigned int seed = time(NULL));
     std::map<Prefix, std::vector<std::string>> getChain();
     void setChain(std::map<Prefix, std::vector<std::string>> _chain);
 };
